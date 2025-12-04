@@ -167,9 +167,12 @@ onUnmounted(() => {
           <!-- Left Side - Name & Info -->
           <div ref="heroContentRef" class="flex-1 opacity-0">
             <p class="text-sm uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-4">Full Stack Developer</p>
-            <h1 class="text-5xl md:text-7xl font-bold text-black dark:text-white mb-6 leading-tight">
+            <h1 class="text-5xl md:text-7xl font-bold text-black dark:text-white mb-2 leading-tight">
               Meljun Mariquit
             </h1>
+            <p class="text-sm uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-6">
+              Codename: <span class="text-black dark:text-white font-semibold">ZIN</span>
+            </p>
             <p class="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-md leading-relaxed">
               Building clean, functional, and user-friendly digital experiences.
             </p>
