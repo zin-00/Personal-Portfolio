@@ -3,6 +3,9 @@ import GuestLayout from '@/layouts/GuestLayout.vue';
 import { onMounted, ref, onUnmounted } from 'vue';
 import { animate, stagger } from 'animejs';
 import MeImage from '@/assets/images/Me.png';
+import LabTrackImage from '@/assets/images/labtrack.png';
+import EamsImage from '@/assets/images/eams.png';
+import IcnsImage from '@/assets/images/icns.png';
 import {
   BsGit,
   FaBandsGithubAlt,
@@ -228,9 +231,9 @@ onUnmounted(() => {
         <p class="text-gray-500 dark:text-gray-400 mb-12 animate-item opacity-0">Selected works</p>
 
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors">
-            <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-              <span class="text-6xl font-bold text-gray-200 dark:text-gray-800">01</span>
+          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden">
+            <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center overflow-hidden">
+              <img :src="LabTrackImage" alt="LabTrack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold text-black dark:text-white mb-2">LabTrack: Computer Laboratory Logging System</h3>
@@ -251,9 +254,9 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors">
-            <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-              <span class="text-6xl font-bold text-gray-200 dark:text-gray-800">02</span>
+          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden">
+            <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center overflow-hidden">
+              <img :src="EamsImage" alt="Employee Attendance Management System" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold text-black dark:text-white mb-2">Employee Attendance Management System</h3>
@@ -272,17 +275,19 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors">
-            <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-              <span class="text-6xl font-bold text-gray-200 dark:text-gray-800">03</span>
+          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden">
+            <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center overflow-hidden">
+              <img :src="IcnsImage" alt="ASSCAT Interactive Campus Navigation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold text-black dark:text-white mb-2">Cool Project</h3>
-              <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm">A brief description of the project and the problem it solves.</p>
-              <div class="flex gap-2">
-                <span class="text-xs text-gray-400">Python</span>
+              <h3 class="text-xl font-bold text-black dark:text-white mb-2">ASSCAT Interactive Campus Navigation System</h3>
+              <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm">An interactive map and facility locator for Agusan del Sur State College of Agriculture and Technology (ASSCAT). Enhances campus navigability, accessibility, and overall experience for students, visitors, and staff.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs text-gray-400">Vue.js</span>
                 <span class="text-xs text-gray-400">•</span>
-                <span class="text-xs text-gray-400">Tkinter</span>
+                <span class="text-xs text-gray-400">Leaflet</span>
+                <span class="text-xs text-gray-400">•</span>
+                <span class="text-xs text-gray-400">Laravel</span>
               </div>
             </div>
           </div>
