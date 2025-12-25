@@ -32,6 +32,7 @@ const techStacksRef = ref(null);
 const contactsRef = ref(null);
 const projectsRef = ref(null);
 const certificatesRef = ref(null);
+const codeNameText = ref(null);
 let observer = null;
 
 const technologies = [
@@ -52,8 +53,8 @@ const technologies = [
 ];
 
 const certificates = [
-  { name: 'Mobile App Development', issuer: 'Certificate of Completion', year: '2024' },
-  { name: 'Smart Contract Training', issuer: 'Blockchain Development', year: '2024' },
+  { name: 'Mobile App Development', issuer: 'Certificate of Completion', year: '2025' },
+  { name: 'Smart Contract Training', issuer: 'Blockchain Development', year: '2025' },
 ];
 
 const socialLinks = [
@@ -66,9 +67,9 @@ const socialLinks = [
 const setupScrollAnimations = () => {
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const target = entry.target;
+      const target = entry.target;
 
+      if (entry.isIntersecting) {
         if (target === contactsRef.value) {
           animate(target.querySelectorAll('.animate-item'), {
             opacity: [0, 1],
@@ -90,7 +91,7 @@ const setupScrollAnimations = () => {
         }
 
         if (target === techStacksRef.value) {
-          animate('.tech-card', {
+          animate(target.querySelectorAll('.tech-card'), {
             opacity: [0, 1],
             scale: [0.9, 1],
             delay: stagger(40),
@@ -108,8 +109,28 @@ const setupScrollAnimations = () => {
             ease: 'easeOutExpo'
           });
         }
+      } else {
+        // Reset elements when they leave viewport so animation can replay
+        if (target === contactsRef.value || target === projectsRef.value) {
+          target.querySelectorAll('.animate-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+          });
+        }
 
-        observer.unobserve(target);
+        if (target === techStacksRef.value) {
+          target.querySelectorAll('.tech-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'scale(0.9)';
+          });
+        }
+
+        if (target === certificatesRef.value) {
+          target.querySelectorAll('.cert-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+          });
+        }
       }
     });
   }, { threshold: 0.1 });
@@ -139,6 +160,43 @@ onMounted(() => {
     });
   }
 
+  // Animate code name type writer effect - loops every 5 seconds
+  if (codeNameText.value) {
+    const codenameSpan = codeNameText.value.querySelector('.codename-text');
+    const zinSpan = codeNameText.value.querySelector('.zin-text');
+
+    if (!codenameSpan || !zinSpan) return;
+
+    const codenameStr = 'Codename: ';
+    const zinStr = 'ZIN';
+
+    const runTypeWriter = () => {
+      codenameSpan.textContent = '';
+      zinSpan.textContent = '';
+      let index = 0;
+      const fullText = codenameStr + zinStr;
+
+      const typeWriter = () => {
+        if (index < fullText.length) {
+          if (index < codenameStr.length) {
+            codenameSpan.textContent += fullText.charAt(index);
+          } else {
+            zinSpan.textContent += fullText.charAt(index);
+          }
+          index++;
+          setTimeout(typeWriter, 100);
+        }
+      };
+
+      typeWriter();
+    };
+
+    // Initial run after small delay
+    setTimeout(runTypeWriter, 500);
+
+    // Repeat every 5 seconds
+    setInterval(runTypeWriter, 5000);
+  }
   // Animate image
   if (imageRef.value) {
     animate(imageRef.value, {
@@ -173,8 +231,8 @@ onUnmounted(() => {
             <h1 class="text-5xl md:text-7xl font-bold text-black dark:text-white mb-2 leading-tight">
               Meljun Mariquit
             </h1>
-            <p class="text-sm uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-6">
-              Codename: <span class="text-black dark:text-white font-semibold">ZIN</span>
+            <p ref="codeNameText" class="text-sm uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-6">
+              <span class="codename-text"></span><span class="text-black dark:text-white font-semibold zin-text"></span>
             </p>
             <p class="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-md leading-relaxed">
               Building clean, functional, and user-friendly digital experiences.
@@ -231,7 +289,7 @@ onUnmounted(() => {
         <p class="text-gray-500 dark:text-gray-400 mb-12 animate-item opacity-0">Selected works</p>
 
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden">
+          <a href="https://github.com/zin-00/labtrack" target="_blank" class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden cursor-pointer">
             <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center overflow-hidden">
               <img :src="LabTrackImage" alt="LabTrack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
@@ -252,9 +310,9 @@ onUnmounted(() => {
                 <span class="text-xs text-gray-400">RFID</span>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden">
+          <a href="https://github.com/zin-00/Attendance-Management-using-Rfid" target="_blank" class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden cursor-pointer">
             <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center overflow-hidden">
               <img :src="EamsImage" alt="Employee Attendance Management System" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
@@ -273,9 +331,9 @@ onUnmounted(() => {
                 <span class="text-xs text-gray-400">RFID</span>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden">
+          <a href="https://github.com/zin-00/icns" target="_blank" class="animate-item opacity-0 group border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-white transition-colors overflow-hidden cursor-pointer">
             <div class="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center overflow-hidden">
               <img :src="IcnsImage" alt="ASSCAT Interactive Campus Navigation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
@@ -290,7 +348,7 @@ onUnmounted(() => {
                 <span class="text-xs text-gray-400">Laravel</span>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
